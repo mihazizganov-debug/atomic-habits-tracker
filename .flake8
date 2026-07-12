@@ -1,4 +1,4 @@
 [flake8]
 max-line-length = 120
 exclude = venv,.venv,env,.env,migrations,__pycache__,.git,.idea,htmlcov
-extend-ignore = E203,W503,F5413
+extend-ignore = E203,W503,F541
