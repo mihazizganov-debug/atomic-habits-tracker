@@ -1,17 +1,20 @@
 from rest_framework import generics, permissions
 from rest_framework.pagination import LimitOffsetPagination
+
 from .models import Habit
 from .serializers import HabitSerializer
 
 
 class HabitPagination(LimitOffsetPagination):
     """Пагинация для привычек"""
+
     default_limit = 5
     max_limit = 20
 
 
 class HabitListCreateView(generics.ListCreateAPIView):
     """Список привычек пользователя и создание новой"""
+
     serializer_class = HabitSerializer
     pagination_class = HabitPagination
     permission_classes = [permissions.IsAuthenticated]
@@ -27,6 +30,7 @@ class HabitListCreateView(generics.ListCreateAPIView):
 
 class HabitRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     """Просмотр, редактирование и удаление привычки"""
+
     serializer_class = HabitSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -37,6 +41,7 @@ class HabitRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 class PublicHabitListView(generics.ListAPIView):
     """Список публичных привычек (доступен всем)"""
+
     serializer_class = HabitSerializer
     pagination_class = HabitPagination
     permission_classes = [permissions.AllowAny]

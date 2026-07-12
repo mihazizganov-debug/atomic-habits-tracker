@@ -2,6 +2,7 @@ import requests
 from celery import shared_task
 from django.conf import settings
 from django.utils import timezone
+
 from habits.models import Habit
 
 
@@ -12,15 +13,15 @@ def send_telegram_message(chat_id, message):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
 
     payload = {
-        'chat_id': chat_id,
-        'text': message,
+        "chat_id": chat_id,
+        "text": message,
     }
 
     try:
         response = requests.post(url, json=payload)
         return response.json()
     except Exception as e:
-        return {'error': str(e)}
+        return {"error": str(e)}
 
 
 @shared_task
