@@ -36,7 +36,7 @@ class HabitModelTest(TestCase):
 
     def test_habit_str(self):
         """Тест строкового представления"""
-        expected = f"Morning exercise - testuser"
+        expected = "Morning exercise - testuser"
         self.assertEqual(str(self.habit), expected)
 
     def test_habit_validators(self):
