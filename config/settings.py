@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+from celery.schedules import crontab
 
 from dotenv import load_dotenv
 
@@ -60,9 +61,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.getenv('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': os.getenv('DB_USER', ''),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', ''),
+        'PORT': os.getenv('DB_PORT', ''),
     }
 }
 
@@ -125,3 +130,10 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_BOT_USERNAME = os.getenv("TELEGRAM_BOT_USERNAME")
 
 AUTH_USER_MODEL = "users.User"
+
+CELERY_BEAT_SCHEDULE = {
+    'send_habit_reminders': {
+        'task': 'bot.tasks.send_habit_reminders',
+        'schedule': crontab(minute='*/1'),  # каждую 1 минуту
+    },
+}

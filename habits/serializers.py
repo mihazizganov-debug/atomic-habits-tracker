@@ -52,4 +52,11 @@ class HabitSerializer(serializers.ModelSerializer):
                 "Привычку необходимо выполнять хотя бы раз в 7 дней"
             )
 
+        if data.get('related_habit'):
+            related = data['related_habit']
+            if not related.is_pleasant:
+                raise serializers.ValidationError(
+                    "Связанная привычка должна быть приятной"
+                )
+
         return data
