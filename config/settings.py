@@ -136,4 +136,3 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
-
