@@ -1,5 +1,4 @@
-i
-mport os
+import os
 from datetime import timedelta
 from pathlib import Path
 from celery.schedules import crontab
@@ -136,3 +135,4 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/1'),
     },
 }
+
