@@ -85,9 +85,8 @@ TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_URL = '/static/'
+STATIC_ROOT = '/app/static/'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -116,7 +115,6 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": False,
 }
 
-# Celery settings
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379")
 CELERY_ACCEPT_CONTENT = ["application/json"]
@@ -134,6 +132,6 @@ AUTH_USER_MODEL = "users.User"
 CELERY_BEAT_SCHEDULE = {
     'send_habit_reminders': {
         'task': 'bot.tasks.send_habit_reminders',
-        'schedule': crontab(minute='*/1'),  # каждую 1 минуту
+        'schedule': crontab(minute='*/1'),
     },
 }
